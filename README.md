@@ -15,3 +15,9 @@ mvn clean package
 cd target
 
 java -jar spring-boot-api-0.1.0.jar
+
+4.notices
+//create tables in first time 
+spring.jpa.hibernate.ddl-auto=none
+//create tables in every time
+spring.jpa.hibernate.ddl-auto=create 
