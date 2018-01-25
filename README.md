@@ -1,12 +1,17 @@
 # SpringBootUsage
 
 1.create database
+
 mysql -uroot
+
 create database db_example
 
 2.create jar
+
 mvn clean package
 
 3.execute jar
+
 cd target
+
 java -jar spring-boot-api-0.1.0.jar
