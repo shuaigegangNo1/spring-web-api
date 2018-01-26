@@ -1,4 +1,4 @@
-package com.sgg.rest.controllers;
+package com.sgg.rest.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
