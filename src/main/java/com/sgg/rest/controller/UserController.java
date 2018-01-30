@@ -14,7 +14,7 @@ import com.sgg.rest.repository.UserRepository;
 import com.sgg.rest.service.UserService;
 
 @RestController
-@RequestMapping("/user") // This means URL's start with /demo (after Application path)
+@RequestMapping("/user") // This means URL's start with /user (after Application path)
 //@SuppressWarnings("all")
 public class UserController {
 	@Autowired // This means to get the bean called userRepository
@@ -23,7 +23,7 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-	//curl 'localhost:8080/demo/add?name=First&email=someemail@someemailprovider.com'	
+	//curl 'localhost:8080/user/add?name=First&email=someemail@someemailprovider.com'	
 	@GetMapping(path="/add") // Map ONLY GET Requests
 	public String addNewUser (@RequestParam String name
 			, @RequestParam String email) {
@@ -36,20 +36,20 @@ public class UserController {
 		userRepository.save(n);
 		return "Saved";
 	}
-	// curl 'localhost:8080/demo/all'
+	// curl 'localhost:8080/user/all'
 	@GetMapping(path="/all")
 	public Iterable<User> getAllUsers() {
 		// This returns a JSON or XML with the users
 		return userRepository.findAll();
 	}
 	
-	// curl 'localhost:8080/demo/delete?name=First'
+	// curl 'localhost:8080/user/delete?name=First'
 	@GetMapping(path="/delete")
 	public String deleteUserByName(@RequestParam String name) {
 		userRepository.deleteByName(name);
 		return "Deleted";
 	}
-	//curl 'localhost:8080/demo/update?id=2'
+	//curl 'localhost:8080/user/update?id=2'
 	@GetMapping(path="/update")
 	public String update(@RequestParam int id) {
 		User sessionUser = userRepository.findOne(id);
