@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sgg.rest.model.Account;
-import com.sgg.rest.model.User;
+import com.sgg.rest.model.ApplicationUser;
 import com.sgg.rest.repository.AccountRepository;
 import com.sgg.rest.repository.UserRepository;
 
@@ -25,7 +25,7 @@ public class AccountController {
 	@GetMapping(path="/addAccount") // Map ONLY GET Requests
 	public String addAccount (@RequestParam String accountNo, @RequestParam int userId) {
 		Account a = new Account();
-		 User u = userRepository.findOne(userId);
+		 ApplicationUser u = userRepository.findOne(userId);
 		a.setAccountNo(accountNo);
 		a.setUser(u);
 //		n.setEmail(email);
@@ -36,7 +36,7 @@ public class AccountController {
 	@GetMapping(path="/allAccount")
 	public Iterable<Account> getAllAccounts(@RequestParam int userId) {
 		// This returns a JSON or XML with the users
-		User u = userRepository.findOne(userId);
+		ApplicationUser u = userRepository.findOne(userId);
 		return accountRepository.findAccountsByUser(u);
 	}
 }

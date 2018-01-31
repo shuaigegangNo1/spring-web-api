@@ -18,17 +18,17 @@ public class Account {
 	private Integer sum;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	private User user;
+	private ApplicationUser user;
 	
     public Integer getId() {
 		return id;
 	}
 
-	public User getUser() {
+	public ApplicationUser getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(ApplicationUser user) {
 		this.user = user;
 	}
 

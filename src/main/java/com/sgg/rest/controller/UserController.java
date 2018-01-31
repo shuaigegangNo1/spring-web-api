@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sgg.rest.model.User;
+import com.sgg.rest.model.ApplicationUser;
 import com.sgg.rest.repository.UserRepository;
 import com.sgg.rest.service.UserService;
 
@@ -30,7 +30,7 @@ public class UserController {
 		// @ResponseBody means the returned String is the response, not a view name
 		// @RequestParam means it is a parameter from the GET or POST request
 
-		User n = new User();
+		ApplicationUser n = new ApplicationUser();
 		n.setName(name);
 		n.setEmail(email);
 		userRepository.save(n);
@@ -38,7 +38,7 @@ public class UserController {
 	}
 	// curl 'localhost:8080/user/all'
 	@GetMapping(path="/all")
-	public Iterable<User> getAllUsers() {
+	public Iterable<ApplicationUser> getAllUsers() {
 		// This returns a JSON or XML with the users
 		return userRepository.findAll();
 	}
@@ -52,7 +52,7 @@ public class UserController {
 	//curl 'localhost:8080/user/update?id=2'
 	@GetMapping(path="/update")
 	public String update(@RequestParam int id) {
-		User sessionUser = userRepository.findOne(id);
+		ApplicationUser sessionUser = userRepository.findOne(id);
 		sessionUser.setName("syg");
 		sessionUser.setEmail("sgg@syg.com");
 		userRepository.save(sessionUser);
@@ -60,7 +60,7 @@ public class UserController {
 	}
 	//curl 'localhost:8080/user/findById?id=2'
 	@GetMapping(path="/findById")
-	public User getUserById(@RequestParam int id) {
+	public ApplicationUser getUserById(@RequestParam int id) {
 //	    User u = userRepository.findOne(id);
 //	    if(u == null) {
 //	        return null;
@@ -68,10 +68,10 @@ public class UserController {
 	
 	    return userService.findOne(id);
 	}
-	@RequestMapping(value="/postUser", method=RequestMethod.POST)
-	public String getNewUser( @RequestBody User u) {
+	@RequestMapping(value="/sign-up", method=RequestMethod.POST)
+	public String getNewUser( @RequestBody ApplicationUser u) {
 		userRepository.save(u);
-		return "add success";
+		return "user sign up success";
 	}
 
 }
