@@ -1,7 +1,12 @@
 package com.sgg.rest.controller;
 
 
+//curl -i -H "Content-Type: application/json" -X POST -d '{
+//    "name": "hxw",
+//    "password": "520"
+//}' http://localhost:8080/login
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +27,8 @@ public class UserController {
 	private UserRepository userRepository;
 	@Autowired
 	private UserService userService;
-	
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	//curl 'localhost:8080/user/add?name=First&email=someemail@someemailprovider.com'	
 	@GetMapping(path="/add") // Map ONLY GET Requests
 	public String addNewUser (@RequestParam String name
@@ -36,7 +42,8 @@ public class UserController {
 		userRepository.save(n);
 		return "Saved";
 	}
-	// curl 'localhost:8080/user/all'
+
+//curl -H "Authorization: Bearer xxx.yyy.zzz" localhost:8080/user/all （带 token认证）
 	@GetMapping(path="/all")
 	public Iterable<ApplicationUser> getAllUsers() {
 		// This returns a JSON or XML with the users
@@ -70,6 +77,7 @@ public class UserController {
 	}
 	@RequestMapping(value="/sign-up", method=RequestMethod.POST)
 	public String getNewUser( @RequestBody ApplicationUser u) {
+		u.setPassword(bCryptPasswordEncoder.encode(u.getPassword()));
 		userRepository.save(u);
 		return "user sign up success";
 	}
