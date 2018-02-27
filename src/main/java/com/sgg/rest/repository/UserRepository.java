@@ -4,8 +4,6 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import com.sgg.rest.model.ApplicationUser;
@@ -24,8 +22,7 @@ public interface UserRepository extends CrudRepository<ApplicationUser, Integer>
     
     @Transactional
     ApplicationUser findByName(String name);
-    //@Transactional
-    // String update(Integer id);
+   
     
 //    @Modifying
 //    @Query("UPDATE User c SET c.name = :name WHERE c.id = :id")

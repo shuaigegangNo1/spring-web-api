@@ -44,6 +44,7 @@ public class UserController {
 	}
 
 //curl -H "Authorization: Bearer xxx.yyy.zzz" localhost:8080/user/all （带 token认证）
+	// curl localhost:8080/user/all
 	@GetMapping(path="/all")
 	public Iterable<ApplicationUser> getAllUsers() {
 		// This returns a JSON or XML with the users
